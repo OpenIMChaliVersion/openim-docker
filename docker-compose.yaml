@@ -6,6 +6,8 @@ services:
   mongo:
     image: "${MONGO_IMAGE}"
     container_name: mongo
+    ports:
+      - "${MONGO_PORT}:9094"
     command: >
       bash -c '
       docker-entrypoint.sh mongod --wiredTigerCacheSizeGB $$wiredTigerCacheSizeGB --auth &
@@ -50,6 +52,8 @@ services:
   redis:
     image: "${REDIS_IMAGE}"
     container_name: redis
+    ports:
+      - "${REDIS_PORT}:9094"
     volumes:
       - "${DATA_DIR}/components/redis/data:/data"
       - "${DATA_DIR}/components/redis/config/redis.conf:/usr/local/redis/config/redis.conf"
@@ -89,10 +93,10 @@ services:
       - ALLOW_NONE_AUTHENTICATION=no
 
       ## Optional: Enable etcd authentication by setting the following credentials
-      # - ETCD_ROOT_USER=root
-      # - ETCD_ROOT_PASSWORD=openIM123
-      # - ETCD_USERNAME=openIM
-      # - ETCD_PASSWORD=openIM123
+      - ETCD_ROOT_USER=root
+      - ETCD_ROOT_PASSWORD=openIM123
+      - ETCD_USERNAME=openIM
+      - ETCD_PASSWORD=openIM123
     volumes:
       - "${DATA_DIR}/components/etcd:/etcd-data"
     command: >
@@ -170,6 +174,8 @@ services:
   kafka:
     image: "${KAFKA_IMAGE}"
     container_name: kafka
+    ports:
+      - "${KAFKA_PORT}:9094"
     user: root
     restart: always
     volumes:

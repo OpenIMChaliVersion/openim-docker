@@ -216,8 +216,8 @@ services:
       KAFKA_CFG_INTER_BROKER_LISTENER_NAME: "INTERNAL"
 
       # Authentication configuration variables - comment out to disable auth
-      # KAFKA_USERNAME: "openIM"
-      # KAFKA_PASSWORD: "openIM123"
+      KAFKA_USERNAME: "openIM"
+      KAFKA_PASSWORD: "openIM123"
     command: >
       /bin/sh -c '
         if [ -n "$${KAFKA_USERNAME}" ] && [ -n "$${KAFKA_PASSWORD}" ]; then
